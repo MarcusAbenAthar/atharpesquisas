@@ -8,6 +8,32 @@ body {
   line-height: 1.7;
 }
 
+/* Estilos para telas maiores */
+@media screen and (min-width: 768px) {
+  .nav-menu {
+    display: flex !important; /* Garante que o menu aparece */
+    max-height: none !important; /* Remove a restrição de altura */
+  }
+
+  .menu-toggle {
+    display: none; /* Esconde o menu hamburguer em telas grandes */
+  }
+}
+
+/* Estilos para telas menores */
+@media screen and (max-width: 767px) {
+  .nav-menu {
+    display: block;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s ease-in-out;
+  }
+
+  .nav-menu.active {
+    max-height: 300px; /* Ajuste conforme o conteúdo */
+  }
+}
+
 /* Header */
 header {
   background-color: #003366;
@@ -40,7 +66,6 @@ nav {
   display: flex;
   margin: 0;
   padding: 0;
-  transition: all 0.3s ease; /* Adicionado para animação suave */
 }
 
 .nav-menu li {
@@ -63,34 +88,39 @@ nav {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 10px;
+  position: relative;
+  z-index: 200;
 }
 
 .hamburger {
-  display: block;
-  width: 25px;
-  height: 3px;
-  background: #ffffff;
   position: relative;
-  transition: background 0.2s ease-out;
+  width: 30px;
+  height: 3px;
+  background: #fff;
+  border-radius: 3px;
+  transition: background 0.3s ease-in-out;
 }
 
 .hamburger::before,
 .hamburger::after {
   content: "";
   position: absolute;
-  width: 100%;
+  left: 0;
+  width: 30px;
   height: 3px;
-  background: #ffffff;
-  transition: transform 0.3s ease;
+  background: #fff;
+  border-radius: 3px;
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+    top 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .hamburger::before {
-  top: -8px;
+  top: -10px;
 }
 
 .hamburger::after {
-  bottom: -8px;
+  top: 10px;
 }
 
 .menu-toggle.active .hamburger {
@@ -98,13 +128,14 @@ nav {
 }
 
 .menu-toggle.active .hamburger::before {
-  transform: translateY(8px) rotate(45deg);
+  transform: rotate(45deg);
+  top: 0;
 }
 
 .menu-toggle.active .hamburger::after {
-  transform: translateY(-8px) rotate(-45deg);
+  transform: rotate(-45deg);
+  top: 0;
 }
-
 /* Hero Section */
 .hero {
   background-color: #f0f8ff;
@@ -487,7 +518,7 @@ footer {
     display: block;
   }
   .nav-menu {
-    display: none;
+    display: none; /* Escondido por padrão */
     flex-direction: column;
     position: absolute;
     top: 100%;
@@ -496,14 +527,39 @@ footer {
     background-color: #003366;
     padding: 1rem 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 99; /* Garantir que o menu fique acima de outros elementos */
+    z-index: 99;
+    transform: translateY(-10px); /* Leve deslocamento inicial */
+    opacity: 0; /* Invisível por padrão */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease; /* Animação suave */
   }
   .nav-menu.active {
-    display: flex;
+    display: flex; /* Mostra o menu */
+    transform: translateY(0); /* Desliza para a posição normal */
+    opacity: 1; /* Torna visível */
   }
   .nav-menu li {
-    margin: 0.8rem 0;
+    margin: 1rem 0;
     text-align: center;
+    opacity: 0; /* Itens começam invisíveis */
+    transform: translateY(-10px); /* Leve deslocamento inicial */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Animação dos itens */
+  }
+  .nav-menu.active li {
+    opacity: 1; /* Aparecem ao abrir */
+    transform: translateY(0); /* Voltam à posição normal */
+  }
+  /* Atraso escalonado para cada item */
+  .nav-menu.active li:nth-child(1) {
+    transition-delay: 0.05s;
+  }
+  .nav-menu.active li:nth-child(2) {
+    transition-delay: 0.1s;
+  }
+  .nav-menu.active li:nth-child(3) {
+    transition-delay: 0.15s;
+  }
+  .nav-menu.active li:nth-child(4) {
+    transition-delay: 0.2s;
   }
   .hero {
     padding: 4rem 1rem;

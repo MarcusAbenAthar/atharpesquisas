@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Toggle do menu hamburger
   const menuToggle = document.querySelector(".menu-toggle");
   const navMenu = document.querySelector(".nav-menu");
 
@@ -10,14 +9,56 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // Estiliza o menu para transição suave
+  navMenu.style.overflow = "hidden";
+  navMenu.style.transition =
+    "transform 0.4s ease-in-out, opacity 0.4s ease-in-out";
+  navMenu.style.transform = "translateY(-10px)";
+  navMenu.style.opacity = "0";
+  navMenu.style.display = "none";
+
   menuToggle.addEventListener("click", () => {
-    menuToggle.classList.toggle("active");
-    navMenu.classList.toggle("active");
+    if (navMenu.classList.contains("active")) {
+      // Fecha suavemente
+      navMenu.style.transform = "translateY(-10px)";
+      navMenu.style.opacity = "0";
+      setTimeout(() => {
+        navMenu.style.display = "none";
+      }, 400);
+      navMenu.classList.remove("active");
+      menuToggle.classList.remove("active");
+    } else {
+      // Abre suavemente
+      navMenu.style.display = "block";
+      setTimeout(() => {
+        navMenu.style.transform = "translateY(0)";
+        navMenu.style.opacity = "1";
+      }, 10);
+      navMenu.classList.add("active");
+      menuToggle.classList.add("active");
+    }
   });
+
+  // Ajusta exibição do menu para desktops
+  function adjustMenu() {
+    if (window.innerWidth > 768) {
+      navMenu.style.display = "block";
+      navMenu.style.opacity = "1";
+      navMenu.style.transform = "translateY(0)";
+      navMenu.classList.remove("active");
+      menuToggle.classList.remove("active");
+    } else {
+      if (!navMenu.classList.contains("active")) {
+        navMenu.style.display = "none";
+      }
+    }
+  }
+  window.addEventListener("resize", adjustMenu);
+  adjustMenu();
 
   // Configuração do EmailJS
   if (typeof emailjs !== "undefined") {
-    emailjs.init("SUA_EMAILJS_USER_ID_AQUI"); // Substitua pelo seu User ID do EmailJS
+    emailjs.init("service_65gqezr"); // Seu Service ID aqui
   } else {
     console.warn("EmailJS não foi carregado corretamente.");
   }
@@ -30,6 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const feedbackMessage = document.createElement("p");
   feedbackMessage.style.marginTop = "1rem";
+  feedbackMessage.style.fontWeight = "bold";
+  feedbackMessage.style.transition = "opacity 0.5s ease-in-out";
   contactForm.appendChild(feedbackMessage);
 
   contactForm.addEventListener("submit", function (event) {
@@ -38,21 +81,25 @@ document.addEventListener("DOMContentLoaded", () => {
     if (typeof emailjs !== "undefined") {
       emailjs
         .sendForm(
-          "SUA_EMAILJS_SERVICE_ID_AQUI", // Substitua pelo seu Service ID
-          "SUA_EMAILJS_TEMPLATE_ID_AQUI", // Substitua pelo seu Template ID
+          "service_65gqezr", // Seu Service ID
+          "template_t9zmt6i", // Seu Template ID
           this
         )
         .then(
           () => {
             feedbackMessage.textContent = "Mensagem enviada com sucesso!";
             feedbackMessage.style.color = "#003366";
+            feedbackMessage.style.opacity = "1";
             contactForm.reset();
-            setTimeout(() => (feedbackMessage.textContent = ""), 5000);
+            setTimeout(() => {
+              feedbackMessage.style.opacity = "0";
+            }, 5000);
           },
           (error) => {
             feedbackMessage.textContent =
               "Erro ao enviar a mensagem. Tente novamente.";
             feedbackMessage.style.color = "#e06b00";
+            feedbackMessage.style.opacity = "1";
             console.error("Erro no envio:", error);
           }
         );
