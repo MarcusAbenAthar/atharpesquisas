@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -8,33 +9,18 @@
       content="Athar Pesquisa de Mercado: Especialistas em pesquisas qualitativas e quantitativas no Brasil. Dados precisos para decisões estratégicas."
     />
     <link rel="stylesheet" href="assets/styles/style.css" />
-    <link
-      rel="preload"
-      href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.css"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <style>
-      body {
-        font-family: "Montserrat", sans-serif;
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-    </style>
-    <script type="importmap">
-      {
-        "imports": {
-          "locomotive-scroll": "https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"
-        }
-      }
-    </script>
+    <link
+      rel="icon"
+      type="image/png"
+      class="fav_logo"
+      href="assets/img/fav_athar_logo.png"
+    />
   </head>
   <body>
     <div data-scroll-container>
@@ -151,6 +137,33 @@
         </ul>
       </section>
 
+      <section id="gallery" class="gallery">
+        <h2>Alguns Clientes</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img
+              src="https://via.placeholder.com/320x200"
+              alt="Pesquisa em campo"
+            />
+            <p>Pesquisa em campo</p>
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://via.placeholder.com/320x200"
+              alt="Entrevista online"
+            />
+            <p>Entrevista online</p>
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://via.placeholder.com/320x200"
+              alt="Análise de dados"
+            />
+            <p>Análise de dados</p>
+          </div>
+        </div>
+      </section>
+
       <section id="projetos" class="projects">
         <h2>Projetos Realizados</h2>
         <div class="projects-grid">
@@ -228,6 +241,19 @@
               placeholder="Seu Email"
               required
             />
+            <div class="phone-container">
+              <select id="country-code" name="country_code" required>
+                <option value="">Selecione o País</option>
+              </select>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="(XX) XXXXXXXXX"
+                maxlength="15"
+                required
+              />
+            </div>
             <textarea
               id="message"
               name="message"
@@ -248,7 +274,7 @@
             <li><a href="#">Política de Privacidade</a></li>
           </ul>
         </nav>
-        <p>© 2024 Athar Pesquisa de Mercado. Todos os direitos reservados.</p>
+        <p>© 2025 Athar Pesquisa de Mercado. Todos os direitos reservados.</p>
       </footer>
     </div>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
