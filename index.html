@@ -6,8 +6,20 @@
     <title>Athar Pesquisa de Mercado</title>
     <meta
       name="description"
-      content="Athar Pesquisa de Mercado: Especialistas em pesquisas qualitativas e quantitativas no Brasil. Dados precisos para decisões estratégicas."
+      content="Athar Pesquisa de Mercado: Especialistas em pesquisas qualitativas e quantitativas no Brasil. Oferecemos coleta de dados, consultoria estratégica e soluções para decisões empresariais."
     />
+    <meta
+      name="keywords"
+      content="pesquisa de mercado, pesquisas qualitativas, pesquisas quantitativas, consultoria estratégica, Brasil"
+    />
+    <meta property="og:title" content="Athar Pesquisa de Mercado" />
+    <meta
+      property="og:description"
+      content="Especialistas em pesquisas qualitativas e quantitativas no Brasil para decisões estratégicas."
+    />
+    <meta property="og:image" content="assets/img/fav_athar_logo.png" />
+    <meta property="og:url" content="https://www.atharpesquisa.com.br" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="assets/styles/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,101 +36,107 @@
   </head>
   <body>
     <div data-scroll-container>
-      <header>
+      <!-- Header com Navbar -->
+      <header role="banner">
         <nav aria-label="Navegação principal">
           <div class="logo">
-            <a href="#" class="link-navbar">
+            <a href="#home" aria-current="page">
               <img
                 src="assets/img/fav_athar_logo.png"
-                alt="Logo da Athar Pesquisa de Mercado"
+                alt="Logo da Athar Pesquisa de Mercado, representando dados estratégicos"
                 style="
-                  height: 40px;
+                  height: 50px;
                   max-width: 100%;
                   margin-right: 10px;
                   vertical-align: middle;
                 "
               />
-            </a>
-            <a href="#" class="link-navbar">
-              <span>Athar Pesquisa de Mercado</span>
+              <span lang="pt-BR">Athar Pesquisa</span>
             </a>
           </div>
           <button class="menu-toggle" aria-label="Abrir menu">
             <span class="hamburger"></span>
           </button>
-          <ul class="nav-menu">
-            <li><a href="#sobre">Sobre Nós</a></li>
-            <li><a href="#servicos">Serviços</a></li>
-            <li><a href="#projetos">Projetos</a></li>
-            <li><a href="#contato">Contato</a></li>
+          <ul class="nav-menu teste">
+            <li><a href="#sobre" lang="pt-BR">Sobre Nós</a></li>
+            <li><a href="#servicos" lang="pt-BR">Serviços</a></li>
+            <li><a href="#projetos" lang="pt-BR">Projetos</a></li>
+            <li><a href="#contato" lang="pt-BR">Contato</a></li>
           </ul>
         </nav>
       </header>
 
+      <!-- Hero com Vídeo de Fundo -->
       <section id="home" class="hero">
+        <video autoplay muted loop class="hero-video">
+          <source src="assets/video/hero-bg.mp4" type="video/mp4" />
+          Seu navegador não suporta vídeos.
+        </video>
         <div class="hero-content">
-          <h1>Dados Precisos para Decisões Estratégicas</h1>
-          <p>
+          <h1 lang="pt-BR">Dados Precisos para Decisões Estratégicas</h1>
+          <p lang="pt-BR">
             Sua parceira em pesquisa qualitativa e quantitativa, atuando em todo
             o Brasil.
           </p>
-          <a href="#contato" class="button">Entre em Contato</a>
+          <a href="#contato" class="button" lang="pt-BR">Entre em Contato</a>
         </div>
       </section>
 
+      <!-- Sobre -->
       <section id="sobre" class="about">
-        <h2>Sobre Nós</h2>
+        <h2 lang="pt-BR">Sobre Nós</h2>
         <div class="about-content">
-          <p>
+          <p lang="pt-BR">
             A Athar Pesquisa de Mercado fornece dados precisos e estratégicos
             para apoiar decisões empresariais. Com atuação nacional e uma rede
             consolidada de parceiros, garantimos excelência operacional em cada
             projeto.
           </p>
-          <h3>Nossos Valores</h3>
+          <h3 lang="pt-BR">Nossos Valores</h3>
           <ul>
-            <li>Ética</li>
-            <li>Transparência</li>
-            <li>Comprometimento</li>
-            <li>Criatividade</li>
-            <li>Agilidade</li>
-            <li>Foco no Cliente</li>
+            <li lang="pt-BR">Ética</li>
+            <li lang="pt-BR">Transparência</li>
+            <li lang="pt-BR">Comprometimento</li>
+            <li lang="pt-BR">Criatividade</li>
+            <li lang="pt-BR">Agilidade</li>
+            <li lang="pt-BR">Foco no Cliente</li>
           </ul>
         </div>
       </section>
 
+      <!-- Serviços -->
       <section id="servicos" class="services">
-        <h2>Serviços</h2>
+        <h2 lang="pt-BR">Serviços</h2>
         <div class="services-grid">
           <div class="service-item">
-            <h3>Recrutamento e Treinamento</h3>
-            <p>
+            <h3 lang="pt-BR">Recrutamento e Treinamento</h3>
+            <p lang="pt-BR">
               Recrutamento, seleção e treinamento de equipes especializadas.
             </p>
           </div>
           <div class="service-item">
-            <h3>Coordenação de Pesquisas</h3>
-            <p>
+            <h3 lang="pt-BR">Coordenação de Pesquisas</h3>
+            <p lang="pt-BR">
               Coordenação e supervisão de pesquisas qualitativas e
               quantitativas.
             </p>
           </div>
           <div class="service-item">
-            <h3>Coleta de Dados</h3>
-            <p>
+            <h3 lang="pt-BR">Coleta de Dados</h3>
+            <p lang="pt-BR">
               Coleta de dados em diversos formatos, garantindo rigor técnico.
             </p>
           </div>
           <div class="service-item">
-            <h3>Questionários</h3>
-            <p>
+            <h3 lang="pt-BR">Questionários</h3>
+            <p lang="pt-BR">
               Aplicação de questionários personalizados para atender às suas
               necessidades.
             </p>
           </div>
           <div class="service-item">
-            <h3>Consultoria Estratégica</h3>
-            <p>
+            <h3 lang="pt-BR">Consultoria Estratégica</h3>
+            <p lang="pt-BR">
               Consultoria especializada para otimizar suas estratégias de
               negócios.
             </p>
@@ -126,107 +144,170 @@
         </div>
       </section>
 
-      <section id="publico-alvo" class="target-audience">
-        <h2>Público-Alvo</h2>
-        <p>
-          Conectamos sua empresa ao seu Público-Alvo, como dona de casa,
-          crianças, fazendeiros, trabalhadores rurais, executivos, políticos,
-          eleitores, médicos, pacientes, correntistas de bancos e produtos
-          bancários, estudantes, consumidores do mercado imobiliário,
-          consumidores de produtos e serviços.
-        </p>
-      </section>
-
+      <!-- Técnicas de Coleta -->
       <section id="tecnicas" class="data-collection">
-        <h2>Técnicas de Coleta de Dados</h2>
+        <h2 lang="pt-BR">Técnicas de Coleta de Dados</h2>
         <ul>
-          <li>📞 Entrevistas Presenciais e Telefônicas</li>
-          <li>💻 Pesquisas Online</li>
-          <li>📍 Central Location e Intercept</li>
-          <li>🔍 Recrutamento e Entrevistas em Profundidade</li>
+          <li lang="pt-BR">📞 Entrevistas Presenciais e Telefônicas</li>
+          <li lang="pt-BR">💻 Pesquisas Online</li>
+          <li lang="pt-BR">📍 Central Location e Intercept</li>
+          <li lang="pt-BR">🔍 Recrutamento e Entrevistas em Profundidade</li>
         </ul>
       </section>
 
-      <section id="gallery" class="gallery">
-        <h2>Alguns Clientes</h2>
-        <div class="gallery-grid">
-          <div class="gallery-item">
-            <img
-              src="https://via.placeholder.com/320x200"
-              alt="Pesquisa em campo"
-            />
-            <p>Pesquisa em campo</p>
-          </div>
-          <div class="gallery-item">
-            <img
-              src="https://via.placeholder.com/320x200"
-              alt="Entrevista online"
-            />
-            <p>Entrevista online</p>
-          </div>
+      <!-- Galeria como Carrossel -->
+      <section
+        id="gallery"
+        class="gallery"
+        role="region"
+        aria-label="Galeria de clientes"
+      >
+        <h2 lang="pt-BR">Alguns Clientes</h2>
+        <div class="gallery-carousel" aria-live="polite">
+          <div class="carousel-inner">
+            <div class="gallery-item">
+              <img
+                src="assets/img/brain_logo.png"
+                alt="Brain Inteligência Estratégica"
+                loading="lazy"
+              />
+              <p lang="pt-BR">Brain Inteligência Estratégica</p>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="assets/img/ipespe_logo.png"
+                alt="Ipespe"
+                loading="lazy"
+              />
+              <p lang="pt-BR">Ipespe</p>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="assets/img/manerba_logo.png"
+                alt="Manerbas Pesquisas"
+                loading="lazy"
+              />
+              <p lang="pt-BR">Manerbas Pesquisas</p>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="assets/img/litz_logo.png"
+                alt="Litz Consultoria"
+                loading="lazy"
+              />
+              <p lang="pt-BR">Litz Consultoria</p>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="assets/img/athar_logo.png"
+                alt="Logo aqui"
+                loading="lazy"
+              />
+              <p lang="pt-BR">Logo aqui</p>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="assets/img/athar_logo.png"
+                alt="Logo aqui"
+                loading="lazy"
+              />
+              <p lang="pt-BR">Logo aqui</p>
+            </div>
+          </div>          
+          <button class="carousel-prev" aria-label="Imagem anterior">❮</button>
+          <button class="carousel-next" aria-label="Próxima imagem">❯</button>
         </div>
       </section>
 
+      <!-- Projetos com Dados ao Vivo -->
       <section id="projetos" class="projects">
-        <h2>Projetos e Metodologias</h2>
+        <h2 lang="pt-BR">Projetos e Metodologias</h2>
         <div class="projects-grid">
           <div class="project-item">
-            <h3>Parceria com Comtexto e Diferencial Pesquisa</h3>
-            <p>
+            <h3 lang="pt-BR">Parceria com Comtexto e Diferencial Pesquisa</h3>
+            <p lang="pt-BR">
               Realizamos, em parceria com a Comtexto Pesquisa de Mercado e
-              Diferencial Pesquisa, 18.000 entrevistas em toda a região Sudeste
-              ao longo de 6 anos, com estudantes e pais de estudantes primários,
-              secundaristas e de ensino superior. O objetivo foi estabelecer a
-              viabilidade de implantação de novas escolas.
+              Diferencial Pesquisa, 18.000 entrevistas em toda a região Sudeste,
+              com estudantes e pais de estudantes primários, secundaristas e de
+              ensino superior. O objetivo foi estabelecer a viabilidade de
+              implantação de novas escolas.
             </p>
-            <p>
+            <p lang="pt-BR">
               <strong>Metodologia:</strong> Entrevistas em ponto de fluxo,
               intercept, em tablet com gravação e localização.
             </p>
           </div>
           <div class="project-item">
-            <h3>Parceria com Litz Consultoria</h3>
-            <p>
+            <h3 lang="pt-BR">Parceria com Litz Consultoria</h3>
+            <p lang="pt-BR">
               Em parceria com a Litz Consultoria, realizamos entrevistas sobre
               suplementos alimentares e motores a explosão. As entrevistas foram
               conduzidas em lojas de motores a explosão e academias, de forma
               presencial.
             </p>
-            <p>
+            <p lang="pt-BR">
               <strong>Metodologia:</strong> Entrevistas face a face, com tablet.
             </p>
           </div>
           <div class="project-item">
-            <h3>Parceria com Manerba Pesquisa e Ipespe</h3>
-            <p>
+            <h3 lang="pt-BR">Parceria com Manerba Pesquisa e Ipespe</h3>
+            <p lang="pt-BR">
               Em parceria com a Manerba Pesquisa de Mercado e o Ipespe Instituto
-              de Pesquisa, de Recife, realizamos, durante a pandemia, inúmeras
-              pesquisas presenciais sobre avaliação de qualidade de serviços de
-              saúde, zeladoria da cidade e imagem de governantes. Também
-              aplicamos mais de 8.000 questionários eleitorais em todo o estado
-              de São Paulo.
+              de Pesquisa, de Recife, realizamos pesquisas presenciais sobre
+              avaliação de qualidade de serviços de saúde, zeladoria da cidade e
+              imagem de governantes. Também aplicamos mais de 8.000
+              questionários eleitorais em todo o estado de São Paulo.
             </p>
-            <p>
+            <p lang="pt-BR">
               <strong>Metodologia:</strong> Pesquisas presenciais e
               questionários.
             </p>
           </div>
           <div class="project-item">
-            <h3>Parceria com Manerba Pesquisa - Serviços de Água</h3>
-            <p>
+            <h3 lang="pt-BR">
+              Parceria com Manerba Pesquisa - Serviços de Água
+            </h3>
+            <p lang="pt-BR">
               Em parceria com a Manerba Pesquisa de Mercado, realizamos mais de
               20.000 entrevistas em todo o estado do Rio de Janeiro, com equipe
               local, sobre avaliação pré e pós-concessão e privatização de
-              serviços públicos de água, analisando a satisfação dos usuários
-              antes e após a privatização.
+              serviços públicos de água, analisando a satisfação dos usuários.
             </p>
-            <p><strong>Metodologia:</strong> Entrevistas presenciais.</p>
+            <p lang="pt-BR">
+              <strong>Metodologia:</strong> Entrevistas presenciais.
+            </p>
           </div>
         </div>
       </section>
 
+      <!-- Impacto Social -->
+      <section id="impacto" class="social-impact">
+        <h2 lang="pt-BR">Nosso Impacto</h2>
+        <div class="impact-grid">
+          <div class="impact-item">
+            <h3 lang="pt-BR">Saúde</h3>
+            <p lang="pt-BR">
+              Pesquisas para melhorar serviços de saúde no interior de SP.
+            </p>
+          </div>
+          <div class="impact-item">
+            <h3 lang="pt-BR">Água</h3>
+            <p lang="pt-BR">
+              20.000 entrevistas para avaliar serviços de água no RJ.
+            </p>
+          </div>
+          <div class="impact-item">
+            <h3 lang="pt-BR">Eleições</h3>
+            <p lang="pt-BR">
+              8.000 questionários eleitorais em SP para democracia.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contato -->
       <section id="contato" class="contact">
-        <h2>Contato</h2>
+        <h2 lang="pt-BR">Contato</h2>
         <div class="contact-container">
           <form id="contact-form">
             <input
@@ -235,17 +316,38 @@
               name="name"
               placeholder="Seu Nome"
               required
+              aria-describedby="name-error"
             />
+            <span class="error-message" id="name-error" lang="pt-BR"></span>
             <input
               type="email"
               id="email"
               name="email"
               placeholder="Seu Email"
               required
+              aria-describedby="email-error"
             />
+            <span class="error-message" id="email-error" lang="pt-BR"></span>
+            <select
+              id="subject"
+              name="subject"
+              required
+              aria-describedby="subject-error"
+            >
+              <option value="" lang="pt-BR">Selecione o Assunto</option>
+              <option value="orcamento" lang="pt-BR">Orçamento</option>
+              <option value="duvida" lang="pt-BR">Dúvida</option>
+              <option value="parceria" lang="pt-BR">Parceria</option>
+            </select>
+            <span class="error-message" id="subject-error" lang="pt-BR"></span>
             <div class="phone-container">
-              <select id="country-code" name="country_code" required>
-                <option value="">Selecione o País</option>
+              <select
+                id="country-code"
+                name="country_code"
+                required
+                aria-describedby="phone-error"
+              >
+                <option value="" lang="pt-BR">Selecione o País</option>
               </select>
               <input
                 type="tel"
@@ -254,32 +356,52 @@
                 placeholder="(XX) XXXXXXXXX"
                 maxlength="15"
                 required
+                aria-describedby="phone-error"
               />
             </div>
+            <span class="error-message" id="phone-error" lang="pt-BR"></span>
             <textarea
               id="message"
               name="message"
               placeholder="Sua Mensagem"
               required
+              aria-describedby="message-error"
             ></textarea>
-            <button type="submit" class="button">Enviar Mensagem</button>
+            <span class="error-message" id="message-error" lang="pt-BR"></span>
+            <button type="submit" class="button" lang="pt-BR">
+              Enviar Mensagem
+            </button>
+            <p class="feedback-message" style="display: none">
+              <span id="feedback-text" lang="pt-BR"></span>
+              <button
+                type="button"
+                class="close-feedback"
+                aria-label="Fechar mensagem"
+                lang="pt-BR"
+              >
+                ✕
+              </button>
+            </p>
           </form>
         </div>
       </section>
 
+      <!-- Footer -->
       <footer>
         <nav class="footer-nav">
           <ul>
-            <li><a href="#sobre">Sobre Nós</a></li>
-            <li><a href="#servicos">Serviços</a></li>
-            <li><a href="#contato">Contato</a></li>
-            <li><a href="#">Política de Privacidade</a></li>
+            <li><a href="#sobre" lang="pt-BR">Sobre Nós</a></li>
+            <li><a href="#servicos" lang="pt-BR">Serviços</a></li>
+            <li><a href="#contato" lang="pt-BR">Contato</a></li>
+            <li>
+              <a href="privacy.html" lang="pt-BR">Política de Privacidade</a>
+            </li>
           </ul>
         </nav>
-        <p>© 2025 Athar Pesquisa de Mercado. Todos os direitos reservados.</p>
+        <p lang="pt-BR">
+          © 2025 Athar Pesquisa de Mercado. Todos os direitos reservados.
+        </p>
       </footer>
-    </div>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script src="assets/scripts/script.js"></script>
   </body>
 </html>

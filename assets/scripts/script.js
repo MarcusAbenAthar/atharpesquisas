@@ -1,157 +1,235 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // === Menu Hambúrguer ===
   const menuToggle = document.querySelector(".menu-toggle");
   const navMenu = document.querySelector(".nav-menu");
 
   if (!menuToggle || !navMenu) {
-    console.error(
-      "Erro: Elementos .menu-toggle ou .nav-menu não encontrados no DOM."
-    );
+    console.error("Erro: Elementos .menu-toggle ou .nav-menu não encontrados.");
     return;
   }
 
-  navMenu.style.overflow = "hidden";
-  navMenu.style.transition =
-    "transform 0.4s ease-in-out, opacity 0.4s ease-in-out";
-  navMenu.style.transform = "translateY(-10px)";
-  navMenu.style.opacity = "0";
-  navMenu.style.display = "none";
-
   menuToggle.addEventListener("click", () => {
-    if (navMenu.classList.contains("active")) {
-      navMenu.style.transform = "translateY(-10px)";
-      navMenu.style.opacity = "0";
-      setTimeout(() => {
-        navMenu.style.display = "none";
-      }, 400);
-      navMenu.classList.remove("active");
-      menuToggle.classList.remove("active");
-    } else {
-      navMenu.style.display = "block";
-      setTimeout(() => {
-        navMenu.style.transform = "translateY(0)";
-        navMenu.style.opacity = "1";
-      }, 10);
-      navMenu.classList.add("active");
-      menuToggle.classList.add("active");
+    navMenu.classList.toggle("active");
+    menuToggle.classList.toggle("active");
+    navMenu.setAttribute("aria-expanded", navMenu.classList.contains("active"));
+  });
+
+  menuToggle.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      navMenu.classList.toggle("active");
+      menuToggle.classList.toggle("active");
     }
   });
 
+  // Ajuste responsivo com debounce
+  let resizeTimeout;
   function adjustMenu() {
     if (window.innerWidth > 768) {
-      navMenu.style.display = "block";
-      navMenu.style.opacity = "1";
-      navMenu.style.transform = "translateY(0)";
       navMenu.classList.remove("active");
       menuToggle.classList.remove("active");
-    } else if (!navMenu.classList.contains("active")) {
-      navMenu.style.display = "none";
     }
   }
-  window.addEventListener("resize", adjustMenu);
+
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(adjustMenu, 100);
+  });
   adjustMenu();
 
-  if (typeof emailjs !== "undefined") {
-    emailjs.init("xShCb4UKljnF5chi0");
-  } else {
-    console.warn("EmailJS não foi carregado corretamente.");
-  }
-
+  // === Formulário de Contato ===
   const contactForm = document.getElementById("contact-form");
   if (!contactForm) {
-    console.error("Erro: Elemento #contact-form não encontrado no DOM.");
+    console.error("Erro: Elemento #contact-form não encontrado.");
     return;
   }
 
-  const feedbackMessage = document.createElement("p");
-  feedbackMessage.style.marginTop = "1rem";
-  feedbackMessage.style.fontWeight = "bold";
-  feedbackMessage.style.transition = "opacity 0.5s ease-in-out";
-  contactForm.appendChild(feedbackMessage);
+  const feedbackMessage = document.querySelector(".feedback-message");
+  const feedbackText = document.getElementById("feedback-text");
+  const closeFeedback = document.querySelector(".close-feedback");
 
-  // Buscar apenas nome e DDI da API restcountries
+  closeFeedback.addEventListener("click", () => {
+    feedbackMessage.style.display = "none";
+  });
+
+  // Preenchimento de códigos de país
   const countrySelect = document.getElementById("country-code");
-  fetch("https://restcountries.com/v3.1/all?fields=name,idd")
-    .then((response) => response.json())
-    .then((data) => {
-      data.sort((a, b) => a.name.common.localeCompare(b.name.common)); // Ordenar por nome
-      data.forEach((country) => {
-        const ddi =
-          country.idd.root +
-          (country.idd.suffixes && country.idd.suffixes[0]
-            ? country.idd.suffixes[0]
-            : "");
-        const option = document.createElement("option");
-        option.value = ddi;
-        option.textContent = `${country.name.common} (${ddi})`;
-        countrySelect.appendChild(option);
+  const cachedCountries = localStorage.getItem("countries");
+  if (cachedCountries) {
+    populateCountries(JSON.parse(cachedCountries));
+  } else {
+    fetch("https://restcountries.com/v3.1/all?fields=name,idd")
+      .then((response) => response.json())
+      .then((data) => {
+        data.sort((a, b) => a.name.common.localeCompare(b.name.common));
+        localStorage.setItem("countries", JSON.stringify(data));
+        populateCountries(data);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar dados dos países:", error);
+        showError("Erro ao carregar os países.", feedbackText, feedbackMessage);
       });
-    })
-    .catch((error) => {
-      console.error("Erro ao buscar dados dos países:", error);
-      feedbackMessage.textContent =
-        "Erro ao carregar os países. Tente novamente mais tarde.";
-      feedbackMessage.style.color = "#e06b00";
-      feedbackMessage.style.opacity = "1";
-    });
+  }
 
+  function populateCountries(data) {
+    data.forEach((country) => {
+      const ddi =
+        country.idd.root +
+        (country.idd.suffixes && country.idd.suffixes[0]
+          ? country.idd.suffixes[0]
+          : "");
+      const option = document.createElement("option");
+      option.value = ddi;
+      option.textContent = `${country.name.common} (${ddi})`;
+      if (ddi === "+55") option.selected = true;
+      countrySelect.appendChild(option);
+    });
+  }
+
+  // Formatação de telefone
   const phoneInput = document.getElementById("phone");
   phoneInput.addEventListener("input", (e) => {
-    let value = e.target.value.replace(/\D/g, ""); // Remove não dígitos
-    if (value.length > 11) value = value.slice(0, 11); // Limita a 11 dígitos
-
+    let value = e.target.value.replace(/\D/g, "");
+    if (value.length > 11) value = value.slice(0, 11);
     if (value.length >= 3) {
       value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
     }
     if (value.length >= 8) {
       value = `${value.slice(0, 7)}-${value.slice(7)}`;
     }
-
     e.target.value = value;
   });
 
+  // Validação do formulário e envio via WhatsApp
   contactForm.addEventListener("submit", function (event) {
     event.preventDefault();
-
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const subjectInput = document.getElementById("subject");
     const countryCode = countrySelect.value;
     const phoneValue = phoneInput.value;
-    const fullPhone = `${countryCode} ${phoneValue}`;
+    const messageInput = document.getElementById("message");
 
+    // Limpar erros anteriores
+    document.querySelectorAll(".error-message").forEach((el) => {
+      el.style.display = "none";
+      el.textContent = "";
+    });
+
+    let hasError = false;
+    if (!nameInput.value.trim()) {
+      showFieldError("name-error", "Por favor, informe seu nome.");
+      hasError = true;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+      showFieldError("email-error", "Por favor, informe um email válido.");
+      hasError = true;
+    }
+    if (!subjectInput.value) {
+      showFieldError("subject-error", "Por favor, selecione um assunto.");
+      hasError = true;
+    }
     if (!countryCode) {
-      feedbackMessage.textContent = "Selecione o código do país.";
-      feedbackMessage.style.color = "#e06b00";
-      feedbackMessage.style.opacity = "1";
-      return;
+      showFieldError("phone-error", "Selecione o código do país.");
+      hasError = true;
     }
-
     if (!/^\(\d{2}\) \d{4,5}-\d{4}$/.test(phoneValue)) {
-      feedbackMessage.textContent =
-        "Telefone inválido. Use o formato (XX) XXXXX-XXXX.";
-      feedbackMessage.style.color = "#e06b00";
-      feedbackMessage.style.opacity = "1";
-      return;
+      showFieldError("phone-error", "Use o formato (XX) XXXXX-XXXX.");
+      hasError = true;
+    }
+    if (!messageInput.value.trim()) {
+      showFieldError("message-error", "Por favor, escreva sua mensagem.");
+      hasError = true;
     }
 
-    if (typeof emailjs !== "undefined") {
-      emailjs
-        .sendForm("service_65gqezr", "template_t9zmt6i", this)
-        .then(() => {
-          feedbackMessage.textContent = "Mensagem enviada com sucesso!";
-          feedbackMessage.style.color = "#003366";
-          feedbackMessage.style.opacity = "1";
-          contactForm.reset();
-          setTimeout(() => {
-            feedbackMessage.style.opacity = "0";
-          }, 5000);
-        })
-        .catch((error) => {
-          feedbackMessage.textContent =
-            "Erro ao enviar a mensagem. Tente novamente.";
-          feedbackMessage.style.color = "#e06b00";
-          feedbackMessage.style.opacity = "1";
-          console.error("Erro no envio:", error);
-        });
-    } else {
-      console.error("EmailJS não está disponível para enviar o formulário.");
-    }
+    if (hasError) return;
+
+    // Construir mensagem para o WhatsApp
+    const whatsappNumber = "+5519983023731";
+    const message = `
+      *Nova Mensagem de Contato - Athar Pesquisa*\n\n
+      *Nome:* ${nameInput.value}\n
+      *Email:* ${emailInput.value}\n
+      *Assunto:* ${subjectInput.value}\n
+      *Telefone:* ${countryCode} ${phoneValue}\n
+      *Mensagem:* ${messageInput.value}
+    `;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+    // Redirecionar para o WhatsApp
+    window.open(whatsappUrl, "_blank");
+
+    // Exibir mensagem de sucesso
+    showSuccess(
+      "Redirecionando para o WhatsApp...",
+      feedbackText,
+      feedbackMessage
+    );
+    contactForm.reset();
+    countrySelect.value = "+55";
   });
+
+  function showFieldError(id, message) {
+    const errorEl = document.getElementById(id);
+    errorEl.textContent = message;
+    errorEl.style.display = "block";
+  }
+
+  function showSuccess(message, feedbackText, feedbackMessage) {
+    feedbackText.textContent = message;
+    feedbackMessage.style.display = "flex";
+    feedbackMessage.setAttribute("role", "alert");
+    setTimeout(() => {
+      feedbackMessage.style.display = "none";
+    }, 5000);
+  }
+
+  function showError(message, feedbackText, feedbackMessage) {
+    feedbackText.textContent = message;
+    feedbackMessage.style.display = "flex";
+    feedbackMessage.setAttribute("role", "alert");
+  }
+
+  // === Carrossel da Galeria ===
+  const carousel = document.querySelector(".gallery-carousel");
+  if (carousel) {
+    const carouselInner = carousel.querySelector(".carousel-inner");
+    const prevBtn = carousel.querySelector(".carousel-prev");
+    const nextBtn = carousel.querySelector(".carousel-next");
+    let currentIndex = 0;
+    const items = carouselInner.querySelectorAll(".gallery-item");
+    const totalItems = items.length;
+
+    function updateCarousel() {
+      const offset = -currentIndex * 100;
+      carouselInner.style.transform = `translateX(${offset}%)`;
+      carousel.setAttribute(
+        "aria-label",
+        `Imagem ${currentIndex + 1} de ${totalItems}`
+      );
+    }
+
+    prevBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+      updateCarousel();
+    });
+
+    nextBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % totalItems;
+      updateCarousel();
+    });
+
+    carousel.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") {
+        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+        updateCarousel();
+      } else if (e.key === "ArrowRight") {
+        currentIndex = (currentIndex + 1) % totalItems;
+        updateCarousel();
+      }
+    });
+
+    updateCarousel();
+  }
 });
