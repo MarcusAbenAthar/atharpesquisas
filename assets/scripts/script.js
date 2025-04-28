@@ -89,15 +89,25 @@ document.addEventListener("DOMContentLoaded", () => {
   // Formatação de telefone
   const phoneInput = document.getElementById("phone");
   phoneInput.addEventListener("input", (e) => {
-    let value = e.target.value.replace(/\D/g, "");
-    if (value.length > 11) value = value.slice(0, 11);
-    if (value.length >= 3) {
-      value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+    const countryCodeValue = countrySelect.value;
+    let raw = e.target.value.replace(/\D/g, "");
+    let formatted = raw;
+    if (countryCodeValue === "+55") {
+      if (raw.length > 11) raw = raw.slice(0, 11);
+      if (raw.length >= 3) {
+        const ddd = raw.slice(0, 2);
+        const rest = raw.slice(2);
+        if (rest.length > 5) {
+          formatted = `(${ddd}) ${rest.slice(0, 5)}-${rest.slice(5)}`;
+        } else {
+          formatted = `(${ddd}) ${rest}`;
+        }
+      }
+    } else {
+      if (raw.length > 15) raw = raw.slice(0, 15);
+      formatted = raw;
     }
-    if (value.length >= 8) {
-      value = `${value.slice(0, 7)}-${value.slice(7)}`;
-    }
-    e.target.value = value;
+    e.target.value = formatted;
   });
 
   // Validação do formulário e envio via WhatsApp
@@ -145,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (hasError) return;
 
     // Construir mensagem para o WhatsApp
-    const whatsappNumber = "+5519983023731";
+    const whatsappNumber = "5519983023731";
     const message = `
       *Nova Mensagem de Contato - Athar Pesquisa*\n\n
       *Nome:* ${nameInput.value}\n
@@ -160,14 +170,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // Redirecionar para o WhatsApp
     window.open(whatsappUrl, "_blank");
 
-    // Exibir mensagem de sucesso
-    showSuccess(
-      "Redirecionando para o WhatsApp...",
-      feedbackText,
-      feedbackMessage
-    );
-    contactForm.reset();
-    countrySelect.value = "+55";
+    // Enviar por EmailJS via formulário
+    emailjs.sendForm('service_w6avj94', 'template_fc7t9nq', contactForm)
+      .then(() => {
+        showSuccess("Mensagem enviada com sucesso pelo WhatsApp e Email!", feedbackText, feedbackMessage);
+        contactForm.reset();
+      })
+      .catch((error) => {
+        console.error("EmailJS error", error);
+        showError("Falha ao enviar email via EmailJS.", feedbackText, feedbackMessage);
+      });
   });
 
   function showFieldError(id, message) {
