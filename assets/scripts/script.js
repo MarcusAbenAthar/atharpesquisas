@@ -37,6 +37,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   adjustMenu();
 
+  // Hide/show navbar ao scroll
+  let lastScrollY = 0;
+  const headerEl = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    const currentY = window.pageYOffset;
+    if (currentY > lastScrollY) {
+      headerEl.classList.add('header-hidden');
+    } else {
+      headerEl.classList.remove('header-hidden');
+    }
+    lastScrollY = currentY;
+  });
+
   // === Formulário de Contato ===
   const contactForm = document.getElementById("contact-form");
   if (!contactForm) {
@@ -210,38 +223,54 @@ document.addEventListener("DOMContentLoaded", () => {
     const prevBtn = carousel.querySelector(".carousel-prev");
     const nextBtn = carousel.querySelector(".carousel-next");
     let currentIndex = 0;
-    const items = carouselInner.querySelectorAll(".gallery-item");
-    const totalItems = items.length;
+    const items = Array.from(carouselInner.querySelectorAll(".gallery-item"));
+    let itemsPerPage = window.innerWidth >= 768 ? 2 : 1;
+    let totalPages = Math.ceil(items.length / itemsPerPage);
+
+    function setPagination() {
+      itemsPerPage = window.innerWidth >= 768 ? 2 : 1;
+      totalPages = Math.ceil(items.length / itemsPerPage);
+      if (currentIndex >= totalPages) currentIndex = totalPages - 1;
+    }
 
     function updateCarousel() {
       const offset = -currentIndex * 100;
       carouselInner.style.transform = `translateX(${offset}%)`;
       carousel.setAttribute(
         "aria-label",
-        `Imagem ${currentIndex + 1} de ${totalItems}`
+        `Página ${currentIndex + 1} de ${totalPages}`
       );
     }
 
     prevBtn.addEventListener("click", () => {
-      currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+      setPagination();
+      currentIndex = (currentIndex - 1 + totalPages) % totalPages;
       updateCarousel();
     });
 
     nextBtn.addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % totalItems;
+      setPagination();
+      currentIndex = (currentIndex + 1) % totalPages;
       updateCarousel();
     });
 
     carousel.addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft") {
-        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+        setPagination();
+        currentIndex = (currentIndex - 1 + totalPages) % totalPages;
         updateCarousel();
       } else if (e.key === "ArrowRight") {
-        currentIndex = (currentIndex + 1) % totalItems;
+        setPagination();
+        currentIndex = (currentIndex + 1) % totalPages;
         updateCarousel();
       }
     });
 
+    window.addEventListener('resize', () => {
+      setPagination();
+      updateCarousel();
+    });
+    setPagination();
     updateCarousel();
   }
 });

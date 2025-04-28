@@ -16,6 +16,7 @@
   <meta property="og:url" content="https://www.atharpesquisa.com.br" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="assets/styles/style.css" />
+  <link rel="stylesheet" href="assets/styles/override.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -134,17 +135,41 @@
     </section>
 
     <!-- Regiões atendidas -->
-    <section id="regioes" class="regions">
+    <section id="regioes" class="regions container">
       <h2 lang="pt-BR">Regiões atendidas</h2>
-      <ul>
-        <li lang="pt-BR"><strong>SUL</strong> (Rio Grande do Sul, Paraná) - Com equipe local, ou, se for mais afastada
-          da Capital, com envio de entrevistadores.</li>
-        <li lang="pt-BR"><strong>Sudeste - Capitais</strong> (São Paulo, Belo Horizonte, Rio de Janeiro) - Com equipe
-          local e interior, com deslocamento do ponto mais próximo.</li>
-        <li lang="pt-BR"><strong>Norte</strong> - Capitais e Interior.</li>
-        <li lang="pt-BR"><strong>Centro Oeste</strong> (Brasília, Goiânia, Campo Grande) - Com equipe local; interior
-          com deslocamento do ponto mais próximo.</li>
-      </ul>
+      <div class="regions-grid">
+        <div class="region-card">
+          <div class="region-header">
+            <div class="region-icon">📍</div>
+            <h3 class="region-title">SUL</h3>
+          </div>
+          <p class="region-details">Rio Grande do Sul, Paraná - Com equipe local, ou, se for mais afastada da Capital,
+            com envio de entrevistadores.</p>
+        </div>
+        <div class="region-card">
+          <div class="region-header">
+            <div class="region-icon">📍</div>
+            <h3 class="region-title">Sudeste - Capitais</h3>
+          </div>
+          <p class="region-details">São Paulo, Belo Horizonte, Rio de Janeiro - Com equipe local e interior, com
+            deslocamento do ponto mais próximo.</p>
+        </div>
+        <div class="region-card">
+          <div class="region-header">
+            <div class="region-icon">📍</div>
+            <h3 class="region-title">Norte</h3>
+          </div>
+          <p class="region-details">Capitais e Interior.</p>
+        </div>
+        <div class="region-card">
+          <div class="region-header">
+            <div class="region-icon">📍</div>
+            <h3 class="region-title">Centro Oeste</h3>
+          </div>
+          <p class="region-details">Brasília, Goiânia, Campo Grande - Com equipe local; interior com deslocamento do
+            ponto mais próximo.</p>
+        </div>
+      </div>
     </section>
 
     <!-- Técnicas de Coleta -->
@@ -178,14 +203,6 @@
           <div class="gallery-item">
             <img src="assets/img/litz_logo.png" alt="Litz Consultoria" loading="lazy" />
             <p lang="pt-BR">Litz Consultoria</p>
-          </div>
-          <div class="gallery-item">
-            <img src="assets/img/athar_logo.png" alt="Logo aqui" loading="lazy" />
-            <p lang="pt-BR">Logo aqui</p>
-          </div>
-          <div class="gallery-item">
-            <img src="assets/img/athar_logo.png" alt="Logo aqui" loading="lazy" />
-            <p lang="pt-BR">Logo aqui</p>
           </div>
         </div>
         <button class="carousel-prev" aria-label="Imagem anterior">❮</button>

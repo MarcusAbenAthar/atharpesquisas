@@ -6,15 +6,34 @@
   --secondary-dark: #e05500;
   --light-bg: #f9f9f9;
   --white: #fff;
+  --font-base: 'Montserrat', sans-serif;
+  --space: 1.5rem;
+  --gray-700: #4a4f58;
 }
 
 body {
   background: var(--light-bg);
   color: #333;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-base);
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+  color: var(--gray-700);
 }
 
-header, footer {
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(0, 48, 135, 0.8);
+  color: var(--white);
+  transition: transform 0.3s ease-in-out;
+}
+
+.header-hidden {
+  transform: translateY(-100%);
+}
+
+footer {
   background: var(--primary);
   color: var(--white);
 }
@@ -88,7 +107,7 @@ section h2::after {
   transform: translateX(-50%);
 }
 
-.services-grid, .projects-grid, .impact-grid, .regions ul, .gallery-carousel .carousel-inner {
+.services-grid, .projects-grid, .impact-grid, .regions ul {
   display: grid;
   gap: 2rem;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -105,4 +124,169 @@ section h2::after {
 .service-item:hover, .project-item:hover, .impact-item:hover, .regions li:hover, .gallery-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  outline: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space);
+}
+
+.feedback-message {
+  background: var(--white);
+  border-left: 4px solid var(--secondary);
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: relative;
+  margin-top: var(--space);
+  animation: fade-in 0.5s ease-out;
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+.feedback-message.fade-out {
+  animation: fade-out 0.5s ease-in;
+  display: none;
+}
+
+/* Regions Cards */
+.regions-grid {
+  display: grid;
+  gap: var(--space);
+  grid-template-columns: 1fr;
+  margin-top: var(--space);
+}
+
+@media (min-width: 768px) {
+  .regions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .regions-grid {
+    justify-items: center;
+  }
+  .region-card {
+    max-width: 340px;
+  }
+}
+
+.region-card {
+  background: var(--white);
+  padding: var(--space);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.region-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.region-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.region-icon {
+  font-size: 2rem;
+  margin-bottom: 0;
+  color: var(--secondary);
+}
+.region-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+.region-details {
+  font-size: 0.9rem;
+  color: var(--gray-700);
+  line-height: 1.4;
+}
+
+/* Gallery Carousel */
+.gallery-carousel {
+  position: relative;
+  overflow: hidden;
+}
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+/* 2 logos per page on desktop, 1 per page on mobile */
+.carousel-inner > .gallery-item {
+  flex: 0 0 50%;
+}
+@media (max-width: 767px) {
+  .carousel-inner > .gallery-item {
+    flex: 0 0 100%;
+  }
+}
+.gallery-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gallery-item img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery-item:hover img {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+@media (max-width: 767px) {
+  .gallery-item {
+    width: 100%;
+  }
+}
+.carousel-prev,
+.carousel-next {
+  background: var(--secondary);
+  color: var(--white);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.carousel-prev {
+  left: var(--space);
+}
+.carousel-next {
+  right: var(--space);
 }
